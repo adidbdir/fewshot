@@ -1,0 +1,57 @@
+<launch>
+    <arg name="node_name" default="fewshot_detection_service"/>
+    <arg name="action_name" default="fewshot_detection"/>
+
+    <!-- Model parameters -->
+    <arg name="config_file" default="configs/open-vocabulary/lvis/vitl.yaml"/>
+    <arg name="rpn_config_file" default="configs/RPN/mask_rcnn_R_50_FPN_1x.yaml"/>
+    <arg name="model_path" default="weights/trained/open-vocabulary/lvis/vitl_0069999.pth"/>
+    <arg name="device" default="cpu"/>
+    <arg name="category_space" default="demo/ycb_prototypes.pth"/>
+    
+    <!-- Detection parameters -->
+    <arg name="confidence_th" default="0.45"/>
+    <arg name="iou_th" default="0.5"/>
+    <arg name="topk" default="1"/>
+    <arg name="overlapping_mode" default="true"/>
+
+    <!-- Camera topics -->
+    <arg name="camera_info_topic" default="/camera/rgb/camera_info"/>
+    <arg name="rgb_topic" default="/camera/rgb/image_raw/compressed"/>
+    <arg name="use_depth" default="false"/>
+    <arg name="depth_topic" default="/camera/depth_registered/image_raw/compressedDepth"/>
+
+    <!-- Service parameters -->
+    <arg name="use_latest_image" default="false"/>
+    <arg name="max_distance" default="-1"/>
+    <arg name="loop_rate" default="30"/>
+
+    <!-- Node -->
+    <node pkg="fewshot_detection" type="fewshot_service.py" name="$(arg node_name)" output="screen">
+        <param name="action_name" type="str" value="$(arg action_name)"/>
+        
+        <!-- Model parameters -->
+        <param name="config_file" type="str" value="$(arg config_file)"/>
+        <param name="rpn_config_file" type="str" value="$(arg rpn_config_file)"/>
+        <param name="model_path" type="str" value="$(arg model_path)"/>
+        <param name="device" type="str" value="$(arg device)"/>
+        <param name="category_space" type="str" value="$(arg category_space)"/>
+        
+        <!-- Detection parameters -->
+        <param name="confidence_th" type="double" value="$(arg confidence_th)"/>
+        <param name="iou_th" type="double" value="$(arg iou_th)"/>
+        <param name="topk" type="int" value="$(arg topk)"/>
+        <param name="overlapping_mode" type="bool" value="$(arg overlapping_mode)"/>
+        
+        <!-- Camera topics -->
+        <param name="camera_info_topic" type="str" value="$(arg camera_info_topic)"/>
+        <param name="rgb_topic" type="str" value="$(arg rgb_topic)"/>
+        <param name="use_depth" type="bool" value="$(arg use_depth)"/>
+        <param name="depth_topic" type="str" value="$(arg depth_topic)"/>
+        
+        <!-- Service parameters -->
+        <param name="use_latest_image" type="bool" value="$(arg use_latest_image)"/>
+        <param name="max_distance" type="double" value="$(arg max_distance)"/>
+        <param name="loop_rate" type="int" value="$(arg loop_rate)"/>
+    </node>
+</launch> 
