@@ -1,0 +1,59 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# プロジェクト構造概要
+
+本プロジェクトは、少数ショット物体検出システムを実装するための以下の2つの主要コンポーネントから構成されます。
+
+## 主要コンポーネント
+
+1. **CDFSOD-benchmark/demo.py** (実装予定)
+   - 少数ショット物体検出のためのデモスクリプト
+   - [devit/demo/demo.py](mdc:devit/demo/demo.py)を参照実装として作成
+
+2. **ROSサービス実装** (実装予定)
+   - 少数ショット手法を用いた物体検出のためのROSサービス
+   - [tam_object_detection/](mdc:tam_object_detection-main/tam_object_detection)の構造を参考に実装
+   - [tam_object_fewshot/](mdc:tam_object_fewshot)ディレクトリに実装予定
+
+## 参照実装の構造
+
+### デモスクリプト
+参照デモスクリプトは以下の機能を提供します：
+- 画像の読み込みと前処理
+- モデルの読み込みと設定
+- 物体検出と可視化
+- コマンドラインインターフェース
+
+### ROSサービス
+ROSサービスの構造は以下の要素を含みます：
+- サービス定義ファイル (srv/)
+- 起動ファイル (launch/)
+- 実装スクリプト (script/)
+- メッセージ定義 (msg/)
+- パッケージ設定 (CMakeLists.txt, package.xml)
+
+## ディレクトリ構成
+
+```
+CDFSOD-benchmark/
+  ├── demo.py       # 実装対象のデモスクリプト
+  └── ...
+
+tam_object_fewshot/
+  ├── CMakeLists.txt  # パッケージビルド設定
+  ├── package.xml     # パッケージ依存関係定義
+  ├── srv/            # サービス定義ファイル
+  ├── launch/         # 起動ファイル
+  ├── script/         # 実装スクリプト
+  └── msg/            # メッセージ定義
+```
+
+## 実装方針
+
+- 既存コードの設計思想を十分に理解し、その構造と機能を踏襲する
+- 再利用性と保守性を考慮したコードを作成する
+- 参照コードのスタイルと命名規則に合わせる
+- 適切なテストとドキュメントを提供する
